@@ -1,0 +1,9 @@
+.product-list {
+  margin: 20px 30px;
+  display: flex;
+  background-color: cornsilk;
+}
+
+.product-item .btn {
+  background-color: none;
+}

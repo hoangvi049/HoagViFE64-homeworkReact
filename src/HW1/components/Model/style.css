@@ -1,0 +1,11 @@
+.model-img {
+  width: 20%;
+  position: relative;
+}
+.glass-selected img {
+  width: 6%;
+  height: auto;
+  position: absolute;
+  top: 32%;
+  right: 47%;
+}
