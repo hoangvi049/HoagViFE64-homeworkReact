@@ -1,11 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 class GheDangDat extends Component {
+  setCancel = (item) => {
+    return () => {
+      const action = {
+        type: "SET_CANCEL",
+        payload: item,
+      };
+      this.props.dispatch(action);
+    };
+  };
+
   renderList = () => {
     const listHTML = this.props.danhSachGheDangDat.map((item) => {
       return (
         <p>
-          Ghế: {item.TenGhe} - {item.Gia}
+          Ghế: {item.TenGhe} - {item.Gia}${" "}
+          <span>
+            <button className="btn-danger" onClick={this.setCancel(item)}>
+              Hủy
+            </button>
+          </span>
         </p>
       );
     });
@@ -19,7 +34,7 @@ class GheDangDat extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    danhSachGheDangDat: state.danhSachGhe.danhSachGheDangDat,
+    danhSachGheDangDat: state.danhSachGhe.reserved,
   };
 };
 export default connect(mapStateToProps)(GheDangDat);

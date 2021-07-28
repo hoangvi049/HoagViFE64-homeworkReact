@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 class GheItem extends Component {
-  onSelect = () => {
-    this.props.dispatch({
-      type: "SET_PRODUCT",
-      payload: this.props.gheItem,
-    });
+  onSelect = (seat) => {
+    // this.props.dispatch({
+    //   type: "SET_PRODUCT",
+    //   payload: this.props.gheItem,
+    // });
+
+    return () => {
+      const action = {
+        type: "SET_PRODUCT",
+        payload: seat,
+      };
+      this.props.dispatch(action);
+    };
   };
 
   render() {
@@ -13,8 +21,8 @@ class GheItem extends Component {
     return (
       <div className="col-3  my-2" key={SoGhe}>
         <button
-          className="btn"
-          onClick={this.onSelect}
+          className="btn-primary"
+          onClick={this.onSelect(this.props.gheItem)}
           // style={{ background: { TrangThai: false ? "green" : "grey" } }}
         >
           {TenGhe}
@@ -24,4 +32,10 @@ class GheItem extends Component {
   }
 }
 
-export default connect()(GheItem);
+const mapStateToProps = (state) => {
+  return {
+    danhSachGheDangDat: state.danhSachGhe.danhSachGheDangDat,
+  };
+};
+
+export default connect(mapStateToProps)(GheItem);
