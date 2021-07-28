@@ -17,15 +17,19 @@ class GheItem extends Component {
   };
 
   render() {
-    const { SoGhe, TenGhe, TrangThai } = this.props.gheItem;
+    const item = this.props.gheItem;
     return (
-      <div className="col-3  my-2" key={SoGhe}>
+      <div className="col-3  my-2" key={item.SoGhe}>
         <button
-          className="btn-primary"
+          className={
+            this.props.reserved.indexOf(item) > -1
+              ? "btn-success"
+              : "btn-primary"
+          }
           onClick={this.onSelect(this.props.gheItem)}
           // style={{ background: { TrangThai: false ? "green" : "grey" } }}
         >
-          {TenGhe}
+          {item.TenGhe}
         </button>
       </div>
     );
@@ -34,7 +38,8 @@ class GheItem extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    danhSachGheDangDat: state.danhSachGhe.danhSachGheDangDat,
+    reserved: state.danhSachGhe.reserved,
+    available: state.danhSachGhe.available,
   };
 };
 
